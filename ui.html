@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+    <link href="ui.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="toolbar">
+        <button class="clockwise">Clockwise</button>
+        <button class="anticlockwise">Anti-clockwise</button>
+        <label for="drawable">Drawable</label>
+        <input type="checkbox" value="true" name="drawable" id="drawable">
+
+        <label for="Resizable">Resizable</label>
+        <input type="checkbox" value="true" name="resizable" id="resizable">
+
+        <label for="scale">Scale</label>
+        <select id="scale" name="scale">
+            <option data-value="1">x1</option>
+            <option data-value="2">x2</option>
+            <option data-value="3">x3</option>
+            <option data-value="4">x4</option>
+            <option data-value="5">x5</option>
+            <option data-value="6">x6</option>
+            <option data-value="7">x7</option>
+            <option data-value="8">x8</option>
+            <option data-value="9">x9</option>
+            <option data-value="10">x10</option>
+        </select>
+    </div>
+
+    <div style="width:1200px">
+        <div class="image-container">
+            <img src="page1.png">
+        </div>
+
+        <div class="preview-container">
+            <canvas class="preview">
+        </div>
+    <div>
+
+    <script src="jquery-1.9.1.js"></script>
+    <script src="ui.js"></script>
+    <script>
+
+        var cropper,
+            scale = 1 ,
+            previewElem = document.querySelector(".preview");
+
+        // Function called when the clip rectangle changes
+        var showPreview = function () {
+
+            if (cropper == null) return;
+
+            cropper.paintPreview(previewElem, scale);
+        };
+
+        cropper = new PanAndZoomCanvas({
+
+            // The image to extend
+            selector: ".image-container img"
+
+            // The canvas background colour
+            , background: 'rgba(0, 91, 255, 0.1)'
+
+            // The mask colour to apply when clipping
+            , maskColour: 'rgba(7, 7, 78, 0.5)'
+
+            // The clip rectangle line width
+            , lineWidth: 4
+
+            // The diameter of each resize corner
+            , anchorSize: 12
+
+            // The colour of the clip rectangle when clipping
+            , clipStroke: '#6D8AFF'
+
+            // The colour of the clip rectangle when dragging
+            , dragStroke: '#FFBC59'
+
+            // The colour of the resizers when resizing
+            , resizeStroke: '#FFBC59'
+
+            , rotation: 90
+
+            , resizable: false
+
+            , draggable: true
+
+            , drawable: false
+
+            // The callback to invoke when a change happens
+            , onChange: showPreview
+
+            //, rotation: 180
+
+            //, sourceRect: {x: 200, y: 200, x2: 400, y2: 400 }
+        });
+
+        showPreview();
+
+        $(".clockwise").click(cropper.clockwise);
+        $(".anticlockwise").click(cropper.anticlockwise);
+        $("#resizable").click(function () {
+            cropper.setResizable(this.checked);
+        });
+        $("#drawable").click(function () {
+            cropper.setDrawable(this.checked);
+        });
+        $("#scale").change(function () {
+            var value = new Number($(this.options[this.selectedIndex]).attr("data-value"));
+            cropper.zoom(value);
+        });
+
+    </script>
+</body>
+</html>

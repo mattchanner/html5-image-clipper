@@ -1,0 +1,19 @@
+.image-container {
+    float:left;
+}
+
+.image-container canvas{
+    border: solid 1px #ccc;
+    box-shadow: 0 0 5px -5px rgba(0, 0, 0, 0.07);
+}
+
+.preview-container {
+    float:left;
+    margin-left: 20px;
+    border: solid 1px #888;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #ccc;
+    min-width: 50px;
+}
+
