@@ -1,8 +1,3 @@
-/**
- * Copyright (C) 1993-2013 ID Business Solutions Limited
- *
- * Created by: Matt Channer
- */
 (function(global) {
 
     // polyfill
