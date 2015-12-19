@@ -1,4 +1,6 @@
-(function(global) {
+/*global window: false*/
+(function (global) {
+    "use strict";
 
     // polyfill
     var requestAnimationFrame =
@@ -103,11 +105,11 @@
         return new Matrix(s, 0, 0, s, 0, 0);
     };
 
-    var Vector = (function (x, y) {
+    var Vector = function (x, y) {
         this.x = x;
         this.y = y;
         this.m = [[x], [y], [1]];
-    });
+    };
 
     Vector.prototype = {
         constructor: Vector,
@@ -120,7 +122,7 @@
     /**
      * Represents a basic rectangle type
      */
-    var Rect = (function (srcX, srcY, srcX2, srcY2) {
+    var Rect = function (srcX, srcY, srcX2, srcY2) {
 
         var x  = srcX  || -1,
             y  = srcY  || -1,
@@ -147,7 +149,7 @@
             clone: function () {
                 return new Rect(this.x, this.y, this.x2, this.y2);
             },
-            move: function(transX, transY) {
+            move: function (transX, transY) {
                 this.x += transX;
                 this.x2 += transX;
 
@@ -164,14 +166,14 @@
                 this.y2 = m2.b();
             }
         };
-    });
+    };
 
     /**
      * Handles mouse events in order to track the position of a drawn
      * clip rectangle, with support for resizing and moving a drawn rectangle
      * around the screen
      */
-    var Tracker = (function (opt) {
+    var Tracker = function (opt) {
 
         var defaults = {
             onStart: function () {},
@@ -491,7 +493,7 @@
         my.viewPort = viewPort;
 
         return my;
-    });
+    };
 
     /**
      * The main publicly visible pan and zoom class, used for drawing
